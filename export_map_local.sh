@@ -16,15 +16,19 @@ map_maxz=$(((maxz + 16) / 32))
 
 printf 'Map will be extracted from %s to %s\n' "$map_minx,$map_minz" "$map_maxx,$map_maxz"
 
-IMG_TEMPDIR=$(mktemp -d)
-trap 'rm -rf "$TEMPDIR"' EXIT
+IMG_TEMPFILE=$(mktemp)
+trap 'rm -f "$IMG_TEMPFILE"' EXIT
 
 i=0
 for z in $(seq "$map_maxz" -1 "$map_minz"); do
     ((z=z*-1))
     for x in $(seq "$map_minx" "$map_maxx"); do
-        echo "Extracting chunk at $x,$z"
-        ln -s "${BASEDIR}0/12/$x/$z.png" "$IMG_TEMPDIR/$i.png"
+        THIS="${BASEDIR}0/12/$x/$z.png"
+        if [ -f "$THIS" ]; then
+            echo "$THIS" >> "$IMG_TEMPFILE"
+        else
+            echo "xc:white" >> "$IMG_TEMPFILE"
+        fi
         ((i=i+1))
     done
 done

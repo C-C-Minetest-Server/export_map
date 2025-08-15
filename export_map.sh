@@ -17,7 +17,7 @@ map_maxz=$(((maxz + 16) / 32))
 printf 'Map will be downloaded from %s to %s\n' "$map_minx,$map_minz" "$map_maxx,$map_maxz"
 
 IMG_TEMPDIR=$(mktemp -d)
-trap 'rm -rf "$TEMPDIR"' EXIT
+trap 'rm -rf "$IMG_TEMPDIR"' EXIT
 
 i=0
 for z in $(seq "$map_maxz" -1 "$map_minz"); do
