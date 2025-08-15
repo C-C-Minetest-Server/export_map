@@ -40,4 +40,4 @@ epoch=$(date +%s)
 FILENAME="map_${epoch}_${minx}_${minz}_${maxx}_${maxz}.png"
 
 # shellcheck disable=SC2046
-montage -geometry +0+0 $(for ((j=0; j < i; j++)); do printf '%s/%d.png ' "$IMG_TEMPDIR" "$j"; done) -tile "${num_column}x${num_row}" "$FILENAME"
+montage -geometry +0+0 "@$IMG_TEMPFILE" -tile "${num_column}x${num_row}" "$FILENAME"
