@@ -1,0 +1,5 @@
+# Grand Groma
+Min x: -3426
+Min z: 856
+Max x: -3138
+Max z: 1157
